@@ -698,10 +698,10 @@ class BM25:
                 f", which is {num_docs} (corpus size should be larger than top-k)."
                 f" Please set with a smaller k or increase the size of corpus."
             )
-        allowed_return_as = ["tuple", "documents"]
+        allowed_return_as = ["tuple", "documents", "indices"]
 
         if return_as not in allowed_return_as:
-            raise ValueError("`return_as` must be either 'tuple' or 'documents'")
+            raise ValueError("`return_as` must be either 'tuple', 'documents', or 'indices'")
         else:
             pass
 
@@ -870,6 +870,8 @@ class BM25:
             return Results(documents=retrieved_docs, scores=scores)
         elif return_as == "documents":
             return retrieved_docs
+        elif return_as == "indices":
+            return indices,scores
         else:
             raise ValueError("`return_as` must be either 'tuple' or 'documents'")
 
